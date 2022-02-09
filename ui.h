@@ -14,10 +14,16 @@ void printError(int code)
 
     case 2:
         printf("(!!!) Incorrect argument(s) format!\n");
+        break;
+    
+    case 3:
+        printf("(!!!) Error on reading file!\n");
+        break;
     
     default:
+        printf("(!!!) Undefined Error!\n");
         break;
     }
 
-    printf("Usage:\nLab2 -f [filename]\n");
+    printf("\nUsage: Lab2 -f [filename]\n");
 }
