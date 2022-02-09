@@ -60,8 +60,11 @@ int main(int argc, char* argv[])
         exit(0);
     }
 
+    clear();
+    printInfo();
+    printf("Исходная строка:\n");
     puts(source);
-    free(source);
     
+    free(source);
     return 0;
 }
