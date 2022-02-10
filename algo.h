@@ -40,9 +40,13 @@ int freqCount(wchar_t* str, float* freq)
 
     // printf("====== %d\n", i);
 
+    int c = 0;
+    for (int j = 0; j < 32; j++)
+        c += count[j];
+
     for (int j = 0; j < 32; j++)
     {
-        freq[j] = (float) count[j] / (float) i;;
+        freq[j] = (float) count[j] / (float) c;;
         // printf("%d %f %ld\n", j,  freq[j], count[j]);
     }
     
