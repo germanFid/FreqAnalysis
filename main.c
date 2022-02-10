@@ -18,7 +18,7 @@ int main(int argc, char* argv[])
     }
 
     // wchar_t* source = ReadFile(argv[2]);
-    wchar_t source[100];
+    wchar_t source[10000];
     FILE* pFile;
 
     pFile = fopen (argv[2] , "r");
