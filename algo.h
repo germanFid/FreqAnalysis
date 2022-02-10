@@ -17,3 +17,66 @@ int strToLowerCase(wchar_t* str)
     
     return 0;
 }
+
+int freqCount(wchar_t* str, float* freq)
+{
+    long count[32]; // letter quantity in source text
+    for (int i = 0; i < 32; i++)
+    {
+        count[i] = 0;
+    }
+    
+    int i = 0;
+    while(str[i] != '\0')
+    {
+        if (str[i] >= 1040 && str[i] <= 1103)
+        {
+            // wprintf(L"%lc ", str[i]);
+            // printf("%d\n", str[i] - 1040);
+            count[str[i] - 1040]++;
+        }
+        i++;
+    }
+
+    // printf("====== %d\n", i);
+
+    for (int j = 0; j < 32; j++)
+    {
+        freq[j] = (float) count[j] / (float) i;;
+        // printf("%d %f %ld\n", j,  freq[j], count[j]);
+    }
+    
+    return 0;
+}
+
+void generateCharArrRU(int* charArr)
+{
+    for (int i = 0; i < 32; i++)
+    {
+        charArr[i] = i + 1040;
+    }
+    
+}
+
+void bubbleSort(float* freqArr, int n, int* charArr) // sorts freqArr and applying same changes for charArr
+{
+    for (int i = 0; i < n-1; i++)
+    {
+        for (int j = 0; j < n-1; j++)
+        {
+            if (freqArr[j] < freqArr[j + 1])
+            {
+                float tf = freqArr[j];
+                int cf = charArr[j];
+
+                freqArr[j] = freqArr[j + 1];
+                freqArr[j + 1] = tf;
+
+                charArr[j] = charArr[j + 1];
+                charArr[j + 1] = cf;
+            }
+        }
+        
+    }
+    
+}
