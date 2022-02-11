@@ -78,6 +78,9 @@ int main(int argc, char* argv[])
         case 2:
             printCompare(iFreq, iCharset, cFreq, cCharset);
             break;
+
+        case 3:
+            break;
         
         default:
             printf("Некорректный ввод!\n");
