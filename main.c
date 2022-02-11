@@ -32,7 +32,6 @@ int main(int argc, char* argv[])
         exit(0);
     }
 
-    // wchar_t* source = ReadFile(argv[2]);
     wchar_t source[100000];
     wfRead(source, argv[2]);
 
@@ -41,20 +40,12 @@ int main(int argc, char* argv[])
 
     strToLowerCase(source);
 
-    // printf("Исходная строка: ");
-    // wprintf(L"%ls\n", source);
-
     float iFreq[32]; // frequency of russian letters in source text
     freqCount(source, iFreq);
 
     int iCharset[32];
     generateCharArrRU(iCharset);
     bubbleSort(iFreq, 32, iCharset);
-
-    // for (int i = 0; i < 32; i++)
-    // {
-    //     wprintf(L"%lc %f\n", iCharset[i], iFreq[i]);
-    // }
     
     wchar_t cypher[100000];
     wfRead(cypher, "input.txt");
@@ -67,11 +58,32 @@ int main(int argc, char* argv[])
     freqCount(cypher, cFreq);
     bubbleSort(cFreq, 32, cCharset);
 
-    printf("Исходный текст\t | \tШифр\n---------------------------------\n");
-    for (int i = 0; i < 32; i++)
+    printMenu();
+    int choice;
+
+    while(1)
     {
-        wprintf(L"%f\t%lc %lc\t%f\n", iFreq[i], iCharset[i], cCharset[i], cFreq[i]);
+        printf("> ");
+        scanf("%1d", &choice);
+
+        switch (choice)
+        {
+        case 0:
+            exit(0);
+
+        case 1:
+            wprintf(L"%ls\n", cypher);
+            break;
+
+        case 2:
+            printCompare(iFreq, iCharset, cFreq, cCharset);
+            break;
+        
+        default:
+            printf("Некорректный ввод!\n");
+            break;
+        }
     }
-    
+
     return 0;
 }

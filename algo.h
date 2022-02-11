@@ -31,14 +31,10 @@ int freqCount(wchar_t* str, float* freq)
     {
         if (str[i] >= 1040 && str[i] <= 1103)
         {
-            // wprintf(L"%lc ", str[i]);
-            // printf("%d\n", str[i] - 1040);
             count[str[i] - 1040]++;
         }
         i++;
     }
-
-    // printf("====== %d\n", i);
 
     int c = 0;
     for (int j = 0; j < 32; j++)
@@ -47,7 +43,6 @@ int freqCount(wchar_t* str, float* freq)
     for (int j = 0; j < 32; j++)
     {
         freq[j] = (float) count[j] / (float) c;;
-        // printf("%d %f %ld\n", j,  freq[j], count[j]);
     }
     
     return 0;
