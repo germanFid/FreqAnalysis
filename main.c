@@ -66,6 +66,9 @@ int main(int argc, char* argv[])
         printf("> ");
         scanf("%1d", &choice);
 
+        int c;
+        while ((c = getchar()) != '\n' && c != EOF) { }
+
         switch (choice)
         {
         case 0:
@@ -80,6 +83,14 @@ int main(int argc, char* argv[])
             break;
 
         case 3:
+            letterChangeOption();
+            
+            wchar_t og;
+            wchar_t to;
+
+            wscanf(L"%lc %lc", &og, &to);
+
+            int res = strReplace(cypher, og, to);
             break;
         
         default:

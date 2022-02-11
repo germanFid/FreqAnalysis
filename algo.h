@@ -77,5 +77,38 @@ void bubbleSort(float* freqArr, int n, int* charArr) // sorts freqArr and applyi
         }
         
     }
-    
+}
+
+int strReplace(wchar_t* str, wchar_t og, wchar_t to)
+{
+    if (og >= 1040 && og <= 1103 && to >= 1040 && to <= 1103)
+    {
+        if (og > 1071) // protects og symbol from being lowercase
+        {
+            og -= 32;
+        }
+
+        if (to <= 1071) // protects 'to' symbol from being uppercase
+        {
+            to += 32;
+        }
+
+        wprintf(L"%lc to %lc\n", og, to);
+
+        int i = 0;
+        while (str[i] != '\0')
+        {
+            if (str[i] == og)
+            {
+                str[i] = to;
+            }
+
+            i++;
+        }
+    }
+
+    else
+        return -1;
+
+    return 0;
 }
