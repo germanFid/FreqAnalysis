@@ -47,10 +47,22 @@ void printCompare(float* iFreq, wchar_t* iCharset, float* cFreq, wchar_t* cChars
 
 void printMenu()
 {
-    printf("Выберите действие:\n1. Отобразить текущее состояние криптограммы\n2. Показать предполагаемые замены\n3. Замена букв\n0. Выход\n");
+    printf("Выберите действие:\n1. Отобразить текущее состояние криптограммы\n2. Показать предполагаемые замены\n3. Заменить букву\n4. История замен\n0. Выход\n");
 }
 
 void letterChangeOption()
 {
     printf("Введите две буквы в формате X<ПРОБЕЛ>Y,\nгде Х - это заменяемая буква, Y - заменяющая\n> ");
+}
+
+void displayHistory(wchar_t (*history)[2], int n)
+{
+    printf("История замен:\n");
+
+    for (int i = 0; i < n; i++)
+    {
+        wprintf(L"%d: %lc -> %lc\n", i+1, history[i][0], history[i][1]);
+    }
+
+    printf("Введите номер шага для отката к нему, \'0\' для выхода\n> ");
 }

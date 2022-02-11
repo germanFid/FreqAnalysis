@@ -79,21 +79,35 @@ void bubbleSort(float* freqArr, int n, int* charArr) // sorts freqArr and applyi
     }
 }
 
-int strReplace(wchar_t* str, wchar_t og, wchar_t to)
+int strReplace(wchar_t* str, wchar_t og, wchar_t to, int mode)
 {
     if (og >= 1040 && og <= 1103 && to >= 1040 && to <= 1103)
     {
-        if (og > 1071) // protects og symbol from being lowercase
+        if (mode)
         {
-            og -= 32;
+            if (og > 1071) // protects og symbol from being lowercase
+            {
+                og -= 32;
+            }
+
+            if (to <= 1071) // protects 'to' symbol from being uppercase
+            {
+                to += 32;
+            }
         }
 
-        if (to <= 1071) // protects 'to' symbol from being uppercase
+        else // for rewind
         {
-            to += 32;
-        }
+             if (og <= 1071) // protects og symbol from being uppercase
+            {
+                og += 32;
+            }
 
-        wprintf(L"%lc to %lc\n", og, to);
+            if (to > 1071) // protects 'to' symbol from being lowercase
+            {
+                to -= 32;
+            }
+        }
 
         int i = 0;
         while (str[i] != '\0')
@@ -111,4 +125,12 @@ int strReplace(wchar_t* str, wchar_t og, wchar_t to)
         return -1;
 
     return 0;
+}
+
+void historyRewind(wchar_t* str, wchar_t (* history)[2] , int step, int nSteps)
+{
+    for (int i = nSteps; i >= step; i--)
+    {
+        strReplace(str, history[i][1], history[i][0], 0);
+    }
 }

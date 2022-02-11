@@ -58,6 +58,9 @@ int main(int argc, char* argv[])
     freqCount(cypher, cFreq);
     bubbleSort(cFreq, 32, cCharset);
 
+    wchar_t changeHistory[5000][2];
+    int nChanges = 0;
+
     printMenu();
     int choice;
 
@@ -90,7 +93,29 @@ int main(int argc, char* argv[])
 
             wscanf(L"%lc %lc", &og, &to);
 
-            int res = strReplace(cypher, og, to);
+            int res = strReplace(cypher, og, to, 1);
+            
+            if (!res)
+            {
+                changeHistory[nChanges][0] = og;
+                changeHistory[nChanges][1] = to;
+
+                nChanges++;
+            }
+            break;
+
+        case 4:
+            displayHistory(changeHistory, nChanges);
+            scanf("%d", &choice);
+
+            if (choice == 0)
+            {
+                break;
+            }
+
+            choice--;
+            historyRewind(cypher, changeHistory, choice, nChanges-1);
+            nChanges = choice + 1;
             break;
         
         default:
