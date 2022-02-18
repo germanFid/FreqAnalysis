@@ -117,6 +117,14 @@ int main(int argc, char* argv[])
             historyRewind(cypher, changeHistory, choice, nChanges-1);
             nChanges = choice + 1;
             break;
+
+        case 5:
+            sortNPrint(cypher, 0);
+            break;
+        
+        case 6:
+            sortNPrint(cypher, 1);
+            break;
         
         default:
             printf("Некорректный ввод!\n");
