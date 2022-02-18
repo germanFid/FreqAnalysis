@@ -134,3 +134,81 @@ void historyRewind(wchar_t* str, wchar_t (* history)[2] , int step, int nSteps)
         strReplace(str, history[i][1], history[i][0], 0);
     }
 }
+
+void sortNPrint(wchar_t* str, int decryptedMode)
+{
+    long maxLen = 0;
+    long curLen = 0;
+
+    int i = 0;
+    while (str[i] != L'\0')
+    {
+        if (str[i] == L' ')
+        {
+            if (curLen > maxLen)
+            {
+                maxLen = curLen;
+            }
+            curLen = 0;
+        }
+
+        else 
+            curLen++;
+
+        i++;
+    }
+
+    if (curLen > maxLen)
+    {
+        maxLen = curLen;
+    }
+
+    wchar_t * pwc;
+    wchar_t * pt;
+
+    for (long i = 0; i <= maxLen; i++)
+    {
+        wchar_t* newStr = malloc(sizeof(*str));
+        wcpcpy(newStr, str);
+
+        int flag_printed = 0; // if printed at least one word
+
+        pwc = wcstok(newStr, L" ,.", &pt);
+        while (pwc != NULL)
+        {
+            long l = 0;
+            if (!decryptedMode) 
+                l = wcslen(pwc);
+
+            else
+            {
+                int j = 0;
+                while (pwc[j] != L'\0')
+                {
+                    if (pwc[j] >= 1040 && pwc[j] <= 1071)
+                        l++;
+
+                    j++;
+                }
+            }
+
+            if (l == i)
+            {
+                if (!flag_printed)
+                {
+                    printf("%ld:\n", i);
+                }
+
+                wprintf(L"%ls\n", pwc);
+                flag_printed = 1;
+            }
+
+            pwc = wcstok(NULL, L" ,.-", &pt);
+        }
+
+        free(newStr); 
+
+        if (flag_printed)
+            printf("\n"); // print for 'groupig'
+    }
+}
