@@ -1,2 +1,2 @@
 all: ui.h algo.h
-	gcc main.c -o Lab2
+	gcc main.c -pedantic -o Lab2
