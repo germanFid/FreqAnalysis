@@ -26,13 +26,16 @@ int main(int argc, char* argv[])
 {
     setlocale(LC_ALL, "ru_RU.UTF-8"); // setting locale to Russian UTF-8
 
-    if (argc != 3 || strcmp(argv[1], "-i") != 0) // check if arguments are correct
+    if (argc != 7 || strcmp(argv[1], "-s") != 0 || strcmp(argv[3], "-i") != 0 || strcmp(argv[5], "-n") != 0) // check if arguments are correct
     {
         printError(2);
         exit(0);
     }
 
-    wchar_t source[100000]; // TODO: Сделать ввод
+    char* end;
+    long strSize = strtol(argv[6], &end, 10);
+
+    wchar_t source[strSize];
     wfRead(source, argv[2]);
 
     clear();
@@ -47,8 +50,8 @@ int main(int argc, char* argv[])
     generateCharArrRU(iCharset);
     bubbleSort(iFreq, 32, iCharset);
     
-    wchar_t cypher[100000];
-    wfRead(cypher, "input.txt");
+    wchar_t cypher[strSize];
+    wfRead(cypher, argv[4]);
     strToLowerCase(cypher);
 
     float cFreq[32];

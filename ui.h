@@ -33,7 +33,7 @@ void printError(int code)
         break;
     }
 
-    printf("\nИспользование: Lab2 -i [filename]\n");
+    printf("\nИспользование: Lab2 -s [файл для анализа] -i [файл с криптограммой] -n [максимальный размер строки]\n");
 }
 
 void printCompare(float* iFreq, wchar_t* iCharset, float* cFreq, wchar_t* cCharset)
