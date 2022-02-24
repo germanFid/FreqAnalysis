@@ -135,7 +135,7 @@ void historyRewind(wchar_t* str, wchar_t (* history)[2] , int step, int nSteps)
     }
 }
 
-void sortNPrint(wchar_t* str, int decryptedMode)
+long maxLexemeLen(wchar_t* str)
 {
     long maxLen = 0;
     long curLen = 0;
@@ -163,8 +163,15 @@ void sortNPrint(wchar_t* str, int decryptedMode)
         maxLen = curLen;
     }
 
+    return maxLen;
+}
+
+void sortNPrint(wchar_t* str, int decryptedMode)
+{
     wchar_t * pwc;
     wchar_t * pt;
+
+    long maxLen = maxLexemeLen(str);
 
     for (long i = 0; i <= maxLen; i++)
     {
@@ -195,9 +202,7 @@ void sortNPrint(wchar_t* str, int decryptedMode)
             if (l == i)
             {
                 if (!flag_printed)
-                {
                     printf("%ld:\n", i);
-                }
 
                 wprintf(L"%ls\n", pwc);
                 flag_printed = 1;

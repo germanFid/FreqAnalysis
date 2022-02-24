@@ -32,7 +32,7 @@ int main(int argc, char* argv[])
         exit(0);
     }
 
-    wchar_t source[100000];
+    wchar_t source[100000]; // TODO: Сделать ввод
     wfRead(source, argv[2]);
 
     clear();
