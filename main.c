@@ -128,6 +128,22 @@ int main(int argc, char* argv[])
         case 6:
             sortNPrint(cypher, 1);
             break;
+
+        case 7:
+            for (int i = 0; i < 32; i++)
+            {
+                int res = strReplace(cypher, cCharset[i], iCharset[i], 1);
+            
+                if (!res)
+                {
+                    changeHistory[nChanges][0] = cCharset[i];
+                    changeHistory[nChanges][1] = iCharset[i];
+
+                    nChanges++;
+                }
+            }
+
+            break;
         
         default:
             printf("Некорректный ввод!\n");
