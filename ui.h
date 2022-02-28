@@ -3,6 +3,7 @@ UI interaction library
 */
 
 #include <stdio.h>
+// #include "structure.h"
 
 #define clear() printf("\033[H\033[J") // Очищает весь экран
 #define gotoxy(x,y) printf("\033[%d;%dH", (y), (x)) // Устанавливает курсор в положение (x, y)
@@ -55,13 +56,14 @@ void letterChangeOption()
     printf("Введите две буквы в формате X<ПРОБЕЛ>Y,\nгде Х - это заменяемая буква, Y - заменяющая\n> ");
 }
 
-void displayHistory(wchar_t (*history)[2], int n)
+void displayHistory(struct stack *pt)
 {
     printf("История замен:\n");
+    int sz = pt->top;
 
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < sz; i += 2)
     {
-        wprintf(L"%d: %lc -> %lc\n", i+1, history[i][0], history[i][1]);
+        wprintf(L"%d: %lc -> %lc\n", i+1, pt->items[i], pt->items[i+1]);
     }
 
     printf("Введите номер шага для отката к нему, \'0\' для выхода\n> ");
