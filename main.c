@@ -6,6 +6,7 @@
 
 #include "ui.h"
 #include "algo.h"
+#include "structure.h"
 
 void wfRead(wchar_t* source, char* filename)
 {
@@ -22,10 +23,13 @@ void wfRead(wchar_t* source, char* filename)
     }
 }
 
+struct stack *history;
+
 int main(int argc, char* argv[])
 {
     setlocale(LC_ALL, "ru_RU.UTF-8"); // setting locale to Russian UTF-8
 
+    history = newStack(5000);
     if (argc != 7 || strcmp(argv[1], "-s") != 0 || strcmp(argv[3], "-i") != 0 || strcmp(argv[5], "-n") != 0) // check if arguments are correct
     {
         printError(2);
@@ -100,15 +104,16 @@ int main(int argc, char* argv[])
             
             if (!res)
             {
-                changeHistory[nChanges][0] = og;
-                changeHistory[nChanges][1] = to;
+                // changeHistory[nChanges][0] = og;
+                // changeHistory[nChanges][1] = to;
+                // nChanges++;
 
-                nChanges++;
+                push(history, og, to);
             }
             break;
 
         case 4:
-            displayHistory(changeHistory, nChanges);
+            displayHistory(history);
             scanf("%d", &choice);
 
             if (choice == 0)
@@ -117,7 +122,7 @@ int main(int argc, char* argv[])
             }
 
             choice--;
-            historyRewind(cypher, changeHistory, choice, nChanges-1);
+            historyRewind(cypher, history, choice, history->top-1);
             nChanges = choice + 1;
             break;
 
@@ -136,10 +141,12 @@ int main(int argc, char* argv[])
             
                 if (!res)
                 {
-                    changeHistory[nChanges][0] = cCharset[i];
-                    changeHistory[nChanges][1] = iCharset[i];
+                    // changeHistory[nChanges][0] = cCharset[i];
+                    // changeHistory[nChanges][1] = iCharset[i];
 
-                    nChanges++;
+                    // nChanges++;
+
+                    push(history, og, to);
                 }
             }
 

@@ -1,3 +1,6 @@
+#ifndef STRUCT_INCLUDED
+#define STRUCT_INCLUDED
+
 #include <string.h>
 #include <stdlib.h>
 
@@ -74,3 +77,5 @@ void pop(struct stack *pt, wchar_t* og, wchar_t* to)
 
     pt->top -= 2;
 }
+
+#endif

@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "structure.h"
 
 int strToLowerCase(wchar_t* str)
 {
@@ -127,11 +128,18 @@ int strReplace(wchar_t* str, wchar_t og, wchar_t to, int mode)
     return 0;
 }
 
-void historyRewind(wchar_t* str, wchar_t (* history)[2] , int step, int nSteps)
+void historyRewind(wchar_t* str, struct stack *pt , int step, int nSteps)
 {
-    for (int i = nSteps; i >= step; i--)
+    for (int i = nSteps / 2; i >= step-1; i -= 2)
     {
-        strReplace(str, history[i][1], history[i][0], 0);
+        // wprintf(L"%lc %lc\n", pt->items[i], pt->items[i-1]);
+        // strReplace(str, pt->items[i], pt->items[i-1], 0);
+        wchar_t og;
+        wchar_t to;
+
+        pop(pt, &og, &to);
+
+        strReplace(str, to, og, 0);
     }
 }
 

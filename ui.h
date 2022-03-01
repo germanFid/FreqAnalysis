@@ -3,7 +3,7 @@ UI interaction library
 */
 
 #include <stdio.h>
-// #include "structure.h"
+#include "structure.h"
 
 #define clear() printf("\033[H\033[J") // Очищает весь экран
 #define gotoxy(x,y) printf("\033[%d;%dH", (y), (x)) // Устанавливает курсор в положение (x, y)
@@ -61,9 +61,11 @@ void displayHistory(struct stack *pt)
     printf("История замен:\n");
     int sz = pt->top;
 
+    int count = 1;
     for (int i = 0; i < sz; i += 2)
     {
-        wprintf(L"%d: %lc -> %lc\n", i+1, pt->items[i], pt->items[i+1]);
+        wprintf(L"%d: %lc -> %lc\n", count, pt->items[i], pt->items[i+1]);
+        count++;
     }
 
     printf("Введите номер шага для отката к нему, \'0\' для выхода\n> ");
