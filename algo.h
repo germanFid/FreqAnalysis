@@ -202,7 +202,7 @@ void sortNPrint(wchar_t* str, int decryptedMode)
             if (l == i)
             {
                 if (!flag_printed)
-                    printf("%ld:\n", i);
+                    wprintf(L"%ld:\n", i);
 
                 wprintf(L"%ls\n", pwc);
                 flag_printed = 1;
@@ -214,6 +214,6 @@ void sortNPrint(wchar_t* str, int decryptedMode)
         free(newStr); 
 
         if (flag_printed)
-            printf("\n"); // print for 'groupig'
+            wprintf(L"\n"); // print for 'groupig'
     }
 }

@@ -70,7 +70,7 @@ int main(int argc, char* argv[])
 
     while(1)
     {
-        printf("> ");
+        wprintf(L"> ");
         scanf("%1d", &choice);
 
         int c;
@@ -133,7 +133,7 @@ int main(int argc, char* argv[])
             break;
         
         default:
-            printf("Некорректный ввод!\n");
+            wprintf(L"Некорректный ввод!\n");
             break;
         }
     }
