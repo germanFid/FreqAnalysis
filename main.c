@@ -18,6 +18,7 @@ void wfRead(wchar_t* source, char* filename)
             printError(3);
             exit(0);
         }
+
         fclose (pFile);
     }
 }
@@ -35,7 +36,7 @@ int main(int argc, char* argv[])
     char* end;
     long strSize = strtol(argv[6], &end, 10);
 
-    wchar_t source[strSize];
+    wchar_t* source = (wchar_t*) calloc(strSize, sizeof(wchar_t));
     wfRead(source, argv[2]);
 
     clear();
@@ -50,7 +51,7 @@ int main(int argc, char* argv[])
     generateCharArrRU(iCharset);
     bubbleSort(iFreq, 32, iCharset);
     
-    wchar_t cypher[strSize];
+    wchar_t* cypher = (wchar_t*) calloc(strSize, sizeof(wchar_t));;
     wfRead(cypher, argv[4]);
     strToLowerCase(cypher);
 
@@ -78,6 +79,8 @@ int main(int argc, char* argv[])
         switch (choice)
         {
         case 0:
+            free(source);
+            free(cypher);
             exit(0);
 
         case 1:
@@ -127,22 +130,6 @@ int main(int argc, char* argv[])
         
         case 6:
             sortNPrint(cypher, 1);
-            break;
-
-        case 7:
-            for (int i = 0; i < 32; i++)
-            {
-                int res = strReplace(cypher, cCharset[i], iCharset[i], 1);
-            
-                if (!res)
-                {
-                    changeHistory[nChanges][0] = cCharset[i];
-                    changeHistory[nChanges][1] = iCharset[i];
-
-                    nChanges++;
-                }
-            }
-
             break;
         
         default:
